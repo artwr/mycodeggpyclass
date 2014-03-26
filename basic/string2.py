@@ -6,6 +6,9 @@
 # Google's Python Class
 # http://code.google.com/edu/languages/google-python-class/
 
+# This code was modified by Arthur Wiedmer. The original code is available 
+# from the Google's Python Class website listed above. 
+
 # Additional basic string exercises
 
 # D. verbing
