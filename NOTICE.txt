@@ -1,0 +1,8 @@
+Code for Google's Python Class
+Copyright 2010 Google Inc.
+
+The original code was developed by Nick Parlante
+at Google Inc.
+
+The current state of the code are solutions developed 
+by Arthur Wiedmer
