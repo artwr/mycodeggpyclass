@@ -20,7 +20,15 @@ Given an apache logfile, find the puzzle urls and download the images.
 Here's what a puzzle url looks like:
 10.254.254.28 - - [06/Aug/2007:00:13:48 -0700] "GET /~foo/puzzle-bar-aaab.jpg HTTP/1.0" 302 528 "-" "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.6) Gecko/20070725 Firefox/2.0.0.6"
 """
-
+# LAB(begin solution)
+def url_sort_key(url):
+  """Used to order the urls in increasing order by 2nd word if present."""
+  match = re.search(r'-(\w+)-(\w+)\.jpg', url)
+  if match:
+    return match.group(2)
+  else:
+    return url
+# LAB(end solution)
 
 def read_urls(filename):
   """Returns a list of the puzzle urls from the given log file,
@@ -34,8 +42,10 @@ def read_urls(filename):
   logfile.close()
   relpathlist = re.findall(r"GET (\S*puzzle\S*) HTTP", text)
   if len(relpathlist) == 0:
-    sys.stderr.write("")
-  relpathlist = sorted(list(set(relpathlist)))
+    sys.stderr.write("No urls found\n")
+    sys.exit(1)
+  relpathlist = list(set(relpathlist))
+  relpathlist = sorted(relpathlist, key = url_sort_key)
   urllist = [protocol + hostname + u for u in relpathlist]
   return urllist
   
